@@ -2360,6 +2360,9 @@ static int cpufreq_cpu_callback(struct notifier_block *nfb,
 					unsigned long action, void *hcpu)
 {
 	unsigned int cpu = (unsigned long)hcpu;
+    
+    if (!cpufreq_driver)
+		return NOTIFY_OK;
 
 	switch (action & ~CPU_TASKS_FROZEN) {
 	case CPU_ONLINE:
@@ -2527,6 +2530,9 @@ int cpufreq_register_driver(struct cpufreq_driver *driver_data)
 		return -EINVAL;
 
 	pr_debug("trying to register driver %s\n", driver_data->name);
+    
+    /* Register for hotplug notifers before blocking hotplug. */
+	register_hotcpu_notifier(&cpufreq_cpu_notifier);
 
 	/* Protect against concurrent CPU online/offline. */
 	get_online_cpus();
@@ -2560,7 +2566,6 @@ int cpufreq_register_driver(struct cpufreq_driver *driver_data)
 		goto err_if_unreg;
 	}
 
-	register_hotcpu_notifier(&cpufreq_cpu_notifier);
 	pr_debug("driver %s up and running\n", driver_data->name);
 
 out:
