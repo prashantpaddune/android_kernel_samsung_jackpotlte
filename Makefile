@@ -346,7 +346,8 @@ include scripts/Kbuild.include
 # Make variables (CC, etc...)
 AS		= $(CCACHE) $(CROSS_COMPILE)as
 LD		= $(CCACHE) $(CROSS_COMPILE)ld
-CC		= $(CCACHE) $(CROSS_COMPILE)gcc
+CC		= /home/prashantp/linux-x86/clang-4639204/bin/clang
+
 CPP		= $(CCACHE) $(CC) -E
 AR		= $(CCACHE) $(CROSS_COMPILE)ar
 NM		= $(CCACHE) $(CROSS_COMPILE)nm

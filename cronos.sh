@@ -18,7 +18,8 @@
 
 # Directory Contol
 CR_DIR=$(pwd)
-CR_TC=/home/prashantp/Downloads/gcc-linaro-4.9.4-2017.01-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-
+CR_TC=/home/prashantp/aarch64-linux-android-4.9/bin/aarch64-linux-android-
+CR_CT=/home/prashantp/linux-x86/clang-4639204/bin/aarch64-linux-gnu-
 CR_DTS=arch/arm64/boot/dts
 CR_DTB=$CR_DIR/boot.img-dtb
 # Kernel Variables
@@ -31,6 +32,7 @@ CR_ARCH=arm64
 CR_DATE=$(date +%Y%m%d)
 # Init build
 export CROSS_COMPILE=$CR_TC
+export CLANG_TRIPLE=$CR_CT
 export ANDROID_MAJOR_VERSION=$CR_ANDROID
 export PLATFORM_VERSION=$CR_PLATFORM
 export $CR_ARCH
